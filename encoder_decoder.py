@@ -14,6 +14,7 @@ class EncoderDecoder:
     def decode(self, x):
         return x
 
+
 class ImageEncoderDecoder(EncoderDecoder):
     def __init__(self, image_format="jpeg"):
         super(ImageEncoderDecoder).__init__()
@@ -32,6 +33,8 @@ class ImageEncoderDecoder(EncoderDecoder):
         return x
 
     def decode(self, x):
+        if isinstance(x, str):
+            x = x.encode()
         return I.open(io.BytesIO(zlib.decompress(base64.b64decode(x))),)
 
 class CSVEncoderDecoder(EncoderDecoder):
@@ -40,7 +43,7 @@ class CSVEncoderDecoder(EncoderDecoder):
 
     def encode(self, x):
         if isinstance(x, pd.DataFrame):
-            x = zlib.compress(sizing_result.to_csv().encode())
+            x = zlib.compress(x.to_csv().encode())
 
         elif isinstance(x, str):
             x = zlib.compress(x.encode())
@@ -53,3 +56,23 @@ class CSVEncoderDecoder(EncoderDecoder):
         x = zlib.decompress(base64.b64decode(x)).decode()
         x = pd.read_csv(io.StringIO(x),index_col=0)
         return x
+
+class PickleEncoderDecoder(EncoderDecoder):
+    def __init__(self, ):
+        super(PickleEncoderDecoder).__init__()
+
+    def encode(self, x):
+        f = io.BytesIO()
+        file = pickle.dump(x, f)
+        f.seek(0)
+        x = zlib.compress(f.read())
+        x = base64.b64encode(x)
+        return x
+
+    def decode(self, x):
+        x = zlib.decompress(base64.b64decode(x))#.decode()
+        f = io.BytesIO(x)
+        x = pickle.load(f)
+        return x
+
+
