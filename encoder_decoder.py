@@ -1,6 +1,7 @@
 import json
 import io
 import PIL.Image as I
+import pandas as pd
 import base64
 import zlib
 
