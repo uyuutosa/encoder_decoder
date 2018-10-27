@@ -2,6 +2,7 @@ import json
 import io
 import PIL.Image as I
 import pandas as pd
+import pickle
 import base64
 import zlib
 
