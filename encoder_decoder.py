@@ -37,7 +37,7 @@ class ImageEncoderDecoder(EncoderDecoder):
     def decode(self, x):
         if isinstance(x, str):
             x = x.encode()
-        return I.open(io.BytesIO(zlib.decompress(base64.b64decode(x))),)
+        return I.open(io.BytesIO(zlib.decompress(base64.b64decode(x))), format='jpeg')
 
 class CSVEncoderDecoder(EncoderDecoder):
     def __init__(self, ):
