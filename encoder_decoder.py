@@ -61,7 +61,7 @@ class CSVEncoderDecoder(EncoderDecoder):
         if isinstance(x, str):
             x = x.encode()
         x = base64.b64decode(x)
-        if is_compress:
+        if self.is_compress:
             x = zlib.decompress(x)
         x = x.decode()
         x = pd.read_csv(io.StringIO(x),index_col=0)
