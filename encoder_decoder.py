@@ -19,7 +19,7 @@ class EncoderDecoder:
 
 class ImageEncoderDecoder(EncoderDecoder):
     def __init__(self, image_format="jpeg", is_compress=True):
-        super(ImageEncoderDecoder).__init__(is_compress)
+        super().__init__(is_compress)
         self.image_format = image_format
 
     def encode(self, x):
@@ -45,7 +45,7 @@ class ImageEncoderDecoder(EncoderDecoder):
 
 class CSVEncoderDecoder(EncoderDecoder):
     def __init__(self, is_compress=True):
-        super(CSVEncoderDecoder).__init__(is_compress)
+        super().__init__(is_compress)
 
     def encode(self, x):
         if isinstance(x, pd.DataFrame):
@@ -69,7 +69,7 @@ class CSVEncoderDecoder(EncoderDecoder):
 
 class PickleEncoderDecoder(EncoderDecoder):
     def __init__(self, is_compress=True):
-        super(PickleEncoderDecoder).__init__(is_compress)
+        super().__init__(is_compress)
 
     def encode(self, x):
         f = io.BytesIO()
