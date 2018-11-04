@@ -36,7 +36,7 @@ class ImageEncoderDecoder(EncoderDecoder):
             if self.is_compress:
                 x = zlib.compress(x)
             x = base64.b64encode(x)
-        return x
+        return x.deocde()
 
     def decode(self, x):
         if isinstance(x, str):
@@ -55,7 +55,7 @@ class CSVEncoderDecoder(EncoderDecoder):
         if self.is_compress:
             x = zlib.compress(x)
         x = base64.b64encode(x)
-        return x
+        return x.decode()
 
     def decode(self, x):
         if isinstance(x, str):
@@ -79,7 +79,7 @@ class PickleEncoderDecoder(EncoderDecoder):
         if self.is_compress:
             x = zlib.compress(x)
         x = base64.b64encode(x)
-        return x
+        return x.decode()
 
     def decode(self, x):
         if isinstance(x, str):
