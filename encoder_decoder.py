@@ -36,7 +36,7 @@ class ImageEncoderDecoder(EncoderDecoder):
             if self.is_compress:
                 x = zlib.compress(x)
             x = base64.b64encode(x)
-        return x.deocde()
+        return x.decode()
 
     def decode(self, x):
         if isinstance(x, str):
