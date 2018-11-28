@@ -25,17 +25,14 @@ class ImageEncoderDecoder(EncoderDecoder):
     def encode(self, x):
         if isinstance(x, str):
             x = open(x, 'rb').read()
-            if self.is_compress:
-                x = zlib.compress(x)
-            x = base64.b64encode(x)
         elif isinstance(x, I.Image):
             img_bytes = io.BytesIO()
             x.save(img_bytes, format=self.image_format)
             img_bytes.seek(0)
             x = img_bytes.read()
-            if self.is_compress:
-                x = zlib.compress(x)
-            x = base64.b64encode(x)
+        if self.is_compress:
+            x = zlib.compress(x)
+        x = base64.b64encode(x)
         return x.decode()
 
     def decode(self, x):
