@@ -41,7 +41,7 @@ class ImageEncoderDecoder(EncoderDecoder):
         x = base64.b64decode(x)
         if self.is_compress:
             x = zlib.decompress(x)
-        return I.open(io.BytesIO(x))))
+        return I.open(io.BytesIO(x))
 
 class CSVEncoderDecoder(EncoderDecoder):
     def __init__(self, is_compress=True):
